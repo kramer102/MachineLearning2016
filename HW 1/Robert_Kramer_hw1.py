@@ -37,7 +37,16 @@ test.insert(1, 'x0', 1)
 alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 per_names = list(itertools.combinations(alphabet, 2))
 eta = .2  # given
-network = pd.DataFrame()
+
+
+# %%
+# makes a list of column names for perceptron DF 
+def col_names(per_names):
+    col_names = []
+    for e in per_names:
+        col_names.append(e[0]+e[1])
+    return col_names
+        
 
 # %%
 # grab_data takes the target from the pernames list and returns the
@@ -130,6 +139,7 @@ def train_perceptron(eta, W, X, T):
 
 # %% Make sure a dataframe exist to add weights to
 def build_network(per_names, eta, training_df):
+    network = pd.DataFrame()
     for e in per_names:
         paired_data = pair_data(e, training_df)
         T = get_T(e, paired_data)
@@ -137,24 +147,61 @@ def build_network(per_names, eta, training_df):
         W = get_ini_W(X)
         W = train_perceptron(eta, W, X, T)
         network[e[0]+e[1]] = W[:, 0]
+    return network
 
 
 # %%
+# get trans gives an output of the transformation matrix with the weights
+# multiplied with the X inputs.  makes a data frame for easy reading
+# Using to check reasonability.  Need to have run the column names
+# could get the names from network instead
+def get_trans(network, test_data):
+    X = get_X(test_data)
+    trans = np.dot(X, network)
+    trans = pd.DataFrame(data=trans, columns=col_names)
+    return trans
+
+
+def get_trans_fired(network, test_data):
+    X = get_X(test_data)
+    trans_fired = fire(X, network)
+    trans_fired = pd.DataFrame(data=trans_fired, columns=col_names)
+    #trans_fired.insert(0, 'target', test_data['target'])  # inserts target
+    return trans_fired
+
+
+# %% adding the predicted letter for each perceptron
+def get_trans_w_predict(network, test_data):
+    trans_fired = get_trans_fired(network, test_data)
+    for i in range(len(test_data)):
+        j = 0
+        for e in network:
+            if trans_fired.iloc[i,j] == 1:
+                trans_fired[i,j] = e[0]
+            else:
+                trans_fired[i,j] = e[1]
+            j += 1
+    return trans_fired
+        
+        
+# %%
+# not working --> returns either A or Z (I don't know why, Does any of it work)
 def predict(network, test_data):
     X = get_X(test_data)
-    fire_perceptrons = fire(X, network)
-    P = np.empty([len(test_data), 1])
-    j = 0
-    for e in network:
+    fired_per = fire(X, network)
+    P = []
+    for i in range(len(test_data)):
+        j = 0
         predict_list = []
-        for i in range(len(fire_perceptrons)):
-            if fire_perceptrons[i,j] == 1:
+        for e in network:
+            if fired_per[i][j] == 1:
                 predict_list.append(e[0])
             else:
                 predict_list.append(e[1])
-        #print predict_list
-        #P[i] = max(set(predict_list), key=predict_list.count)  # from stackover
-        j += 1
-    return P, predict_list
+            j += 1
+        P.append(max(set(predict_list), key=predict_list.count))  # from stack
+    return P
+        
+        
     
            
