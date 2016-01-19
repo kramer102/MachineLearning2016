@@ -12,7 +12,7 @@
 import numpy as np
 import pandas as pd
 import itertools
-import matplotlib.pyplot as plt
+
 
 
 # %%
@@ -33,11 +33,13 @@ train.iloc[:, 1:] = train.iloc[:, 1:]/15
 test.iloc[:, 1:] = test.iloc[:, 1:]/15
 train.insert(1, 'x0', 1)  # bias input --> 17 wieghts needed
 test.insert(1, 'x0', 1)
+# shuffling data to see if my accuracy increases.  Varies between .50 and .63
+#train = train.reindex(np.random.permutation(train.index))
 # using itertools to generate the 325 perceptron names
 # todo --> gerneralize for any target column
 alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 per_names = list(itertools.combinations(alphabet, 2))
-eta = .1  # given
+eta = .2  # given
 
 
 # %%
@@ -75,7 +77,7 @@ def get_T(per_name_element, paired_data):
 
 
 # %%
-# returns a matrix X
+# returns the input matrix X
 def get_X(paired_data):
     X = paired_data.iloc[:, 1:]
     X = X.as_matrix()
@@ -84,7 +86,6 @@ def get_X(paired_data):
 
 # %%
 # returns a column vector of weights using the size of inputs
-# doesn't change for this dataset. Could hard-code
 def get_ini_W(X):
     W = np.reshape(np.random.rand(X.shape[1]),
                                  (X.shape[1], 1))
@@ -94,7 +95,6 @@ def get_ini_W(X):
 
 # %%
 # takes in the xdoty values and replaces them with a target estimate
-# only works with arrays y / abs(y) works better
 # Y is a vector of perceptron predictions "neuron fire"
 def fire(X, W):
     Y = np.dot(X, W)
@@ -113,23 +113,26 @@ def accuracy(X, W, T):
 
 
 # %%
-# update weights w if w dot x does not correctly predict t
-# all arrays
+# takes in eta, weight vector W, input matrix X, and Target vector T
+# outputs the updated W after 1 epoch using stocastic decent
 def train_epoch(eta, W, X, T):
     for i in range(len(X)):
         y = fire(X[i], W)[0]
         if y != T[i][0]:
-            W = W + eta*T[i][0]*X[i].reshape(len(X[0]), 1)  # need Xi as col vec
+            W = W + eta*T[i][0]*X[i].reshape(len(X[0]), 1)  # need Xi as vec
         i += 1
     return W
 
 
 # %%
 # train a pairwise perceptron
+# takes in eta, weight vector W, input matrix X, and Target vector T
+# outputs the final W.  Also returns the accuracy and number of epochs
 def train_perceptron(eta, W, X, T):
     acc = 0
     i = 0
-    while accuracy(X, W, T)-acc >= 0 and i < 20:
+    #  If I run them 20 times, I get much better accuracy
+    while i < 20:  #  accuracy(X, W, T)-acc >= 0 and 
         #  print W[0:3]
         #  print acc
         acc = accuracy(X, W, T)
@@ -138,7 +141,11 @@ def train_perceptron(eta, W, X, T):
     return W, str(acc), str(i)
 
 
-# %% Make sure a dataframe exist to add weights to
+# %% Inputs the perceptron names, eta, and training dataframe.
+# runs for all of the perceptron names.  Makes a dataframe with
+# column names giving information about the pair trained, accuracy of
+# the final epoch, and the number of epochs run.  Easy to inspect in
+# Spyder IDE
 def build_network(per_names, eta, training_df):
     network = pd.DataFrame()
     for e in per_names:
@@ -154,8 +161,7 @@ def build_network(per_names, eta, training_df):
 # %%
 # get trans gives an output of the transformation matrix with the weights
 # multiplied with the X inputs.  makes a data frame for easy reading
-# Using to check reasonability.  Need to have run the column names
-# could get the names from network instead
+# Using to check reasonability after an early error. 
 def get_trans(network, test_data):
     X = get_X(test_data)
     col_names = list(network.columns.values)
@@ -174,7 +180,7 @@ def get_trans_fired(network, test_data):
 
 
 # %% adding the predicted letter for each perceptron
-# takes forever.  Okay for a few predictions
+# takes forever.  Okay for a few predictions.  Used to troubleshoot.
 def get_trans_w_predict(network, test_data):
     trans_fired = get_trans_fired(network, test_data)
     for i in range(len(test_data)):
@@ -189,8 +195,8 @@ def get_trans_w_predict(network, test_data):
 
 
 # %%
-# Voting.  The max(set(list), key=list.count) one
-# doesn't randomize ties
+# Takes in the list of perceptron predictions and outputs the max occurance
+# with ties broken at random
 def pick_winner(predict_list):
     As = predict_list.count('A')
     Bs = predict_list.count('B')
@@ -237,7 +243,7 @@ def pick_winner(predict_list):
 
 
 # %%
-# not working --> returns either A or Z (I don't know why, Does any of it work)
+# Inputs test data and the network.  Outputs a list of predictions
 def predict(network, test_data):
     X = get_X(test_data)
     fired_per = fire(X, network)
@@ -252,7 +258,6 @@ def predict(network, test_data):
                 predict_list.append(e[1])
             j += 1
         P.append(pick_winner(predict_list))
-        #P.append(max(set(predict_list), key=predict_list.count))  # from stack
     return P
 
 
@@ -266,7 +271,22 @@ def predict_accuracy(pred_list, target):
         if pred_list[i] == target[i]:
             count += 1
     count = float(count)
-    return count/len(target)+0.0
+    return count/len(target)
+
+
+# %% suffle until decent prediction runs through and randomly shuffles the
+# training data until it can somewhat accurately predict the training data
+# With this method, the max is .64 after 34 iterations.
+def shuffle_til_decent(per_names, eta, train):
+    acc = 0
+    while acc < .76:
+        train = train.reindex(np.random.permutation(train.index))
+        network = build_network(per_names, eta, train)
+        pred_list = predict(network, train)
+        tar_series = train['target']
+        acc = predict_accuracy(pred_list, tar_series)
+        print acc
+    return network
 
 
 # %% np.array for confusion matrix
@@ -284,9 +304,11 @@ def conf_matrix(pred_list, target):
     matrix = pd.DataFrame(matrix, index=list_map, columns=list_map)
     return matrix
 # %% Running the program.  Takes a couple minutes
-network = build_network(per_names, eta, train)
+#network = build_network(per_names, eta, train)
+network = shuffle_til_decent(per_names, eta, train)
 pred_list = predict(network, test)
 tar_series = test['target']
 acc = predict_accuracy(pred_list, tar_series)
 confusion = conf_matrix(pred_list, test['target'])
 #confusion.to_clipboard()
+#network.to_clipboard()
