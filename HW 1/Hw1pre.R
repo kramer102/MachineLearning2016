@@ -8,6 +8,8 @@ data[,2:17] <- data[,2:17]/15  # normalizing data
 train <- data[1:10000,]
 test <- data[10001:20000,]
 
+A_B_train <- subset(train, X1 == 'A' | X1 == 'B')
+write.csv2(A_B_train,file = '/Users/kramerPro/Google Drive/Machine Learning/HW 1/ABtrain.csv')
 
 A_train <- train[train$X1=='A',]
 A_test <- test[test$X1=='A',]

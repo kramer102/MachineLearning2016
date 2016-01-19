@@ -37,7 +37,7 @@ test.insert(1, 'x0', 1)
 # todo --> gerneralize for any target column
 alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 per_names = list(itertools.combinations(alphabet, 2))
-eta = .2  # given
+eta = .1  # given
 
 
 # %%
@@ -119,7 +119,7 @@ def train_epoch(eta, W, X, T):
     for i in range(len(X)):
         y = fire(X[i], W)[0]
         if y != T[i][0]:
-            W = W + eta*T[i][0]*X[i].reshape(len(X[0]),1)  # need Xi as col vec
+            W = W + eta*T[i][0]*X[i].reshape(len(X[0]), 1)  # need Xi as col vec
         i += 1
     return W
 
@@ -129,13 +129,13 @@ def train_epoch(eta, W, X, T):
 def train_perceptron(eta, W, X, T):
     acc = 0
     i = 0
-    while accuracy(X, W, T)-acc >= 0 and i < 10:
+    while accuracy(X, W, T)-acc >= 0 and i < 20:
         #  print W[0:3]
         #  print acc
         acc = accuracy(X, W, T)
         W = train_epoch(eta, W, X, T)
         i += 1
-    return W
+    return W, str(acc), str(i)
 
 
 # %% Make sure a dataframe exist to add weights to
@@ -146,8 +146,8 @@ def build_network(per_names, eta, training_df):
         T = get_T(e, paired_data)
         X = get_X(paired_data)
         W = get_ini_W(X)
-        W = train_perceptron(eta, W, X, T)
-        network[e[0]+e[1]] = W[:, 0]
+        W, acc, i = train_perceptron(eta, W, X, T)
+        network[e[0]+e[1]+" "+acc[0:4]+" "+i] = W[:, 0]
     return network
 
 
@@ -289,4 +289,4 @@ pred_list = predict(network, test)
 tar_series = test['target']
 acc = predict_accuracy(pred_list, tar_series)
 confusion = conf_matrix(pred_list, test['target'])
-confusion.to_clipboard()
+#confusion.to_clipboard()
