@@ -38,6 +38,13 @@ def membership(data, M):
     return mem
 
 
+# np data
+def sse(data, M):
+    errors = np.zeros(len(data))
+    mem = membership(data, M)
+    for i in range(len(data)):
+        errors[i] = d2(data[i], M[mem[i]])
+    return int(np.sum(errors))
 # np array inputs 
 # takes data and membership list to update M
 # creates a warning: ignore for now
@@ -56,7 +63,7 @@ def match_count(M0, M1):
     count = 0
     for i in range(len(M0)):
         for j in range(len(M1)):
-            if np.allclose(M0[i],M1[j]):
+            if np.allclose(M0[i],M1[j],rtol=1e-09):
                 count+=1
     print(count)
     return count
@@ -90,18 +97,27 @@ def find_cluster_labels(train_data, M):
             labels[i][0]=i
             unique, counts = np.unique(train_data[mem==i].iloc[:,-1],
                                        return_counts=True)
-            labels[i][1] = unique[counts.argmax()]
-            labels[i][2] = counts.max()/float(counts.sum())
+            if unique.any():
+                labels[i][1] = unique[counts.argmax()]
+                labels[i][2] = counts.max()/float(counts.sum())
     return labels
 
 
-def classification()
+#def classification(membership, labels):
+#    predict = np.ones(len(membership))*-1
+#    for i in range(len(predict)):
+        
+        
 # %%
 #train_data = pd.read_csv("/Users/kramerPro/Google Drive/Machine Learning/HW5/optdigits/optdigits.train", 
 #                    header=None)
+##train_data = train_data.rename(columns = {64:'class'})  # class is true class
+##train_data.insert(len(train_data.loc[0]), 'labels', -1)
+##train_data.insert(len(train_data.loc[0]), 'predict', -1)
 #test_data = pd.read_csv("/Users/kramerPro/Google Drive/Machine Learning/HW5/optdigits/optdigits.train",
 #                   header=None)
-#train = np.asarray(train_data.iloc[:, :-1])
+#train = np.asarray(train_data.iloc[:, :-1]) 
+###### get test done too
 #test = test_data.iloc[:, :-1]
 
 
@@ -120,8 +136,39 @@ def classification()
 #
 #dist = get_distances(X,M)
 
-M1 = find_clusters(train,10)
-membership = membership(train, M1)
-unique, counts = np.unique(train_data[membership==0].iloc[:,-1], return_counts=True)
-freq_table = np.asarray((unique, counts)).T
-find_cluster_label(train_data, M1)
+#M1 = find_clusters(train,10)
+#mem = membership(train, M1)
+#sserror = sse(train, M1)
+##sse = np.sum(sse)
+##unique, counts = np.unique(train_data[mem==0].iloc[:,-1], return_counts=True)
+##freq_table = np.asarray((unique, counts)).T
+#labels = find_cluster_labels(train_data, M1)
+############# testing from online example
+ex = np.array([2,10], [2,5], [8,4], [5,8], [7,5], [6,4], [1,2], [4,9])
+# %%
+## Experiment 1
+# repeat k-means 5 times to find lowest SSE
+#M1 = find_clusters(train,10)
+#mem1 = membership(train, M1)
+#sserror1 = sse(train, M1)
+#labels1 = find_cluster_labels(train_data, M1)
+#
+#M2 = find_clusters(train,10)
+#mem2 = membership(train, M2)
+#sserror2 = sse(train, M2)
+#labels2 = find_cluster_labels(train_data, M2)
+#
+#M3 = find_clusters(train,10)
+#mem3 = membership(train, M3)
+#sserror3 = sse(train, M3)
+#labels3 = find_cluster_labels(train_data, M3)
+#
+#M4 = find_clusters(train,10)
+#mem4 = membership(train, M4)
+#sserror4 = sse(train, M4)
+#labels4 = find_cluster_labels(train_data, M4)
+#
+#M5 = find_clusters(train,10)
+#mem5 = membership(train, M5)
+#sserror5 = sse(train, M5)
+#labels5 = find_cluster_labels(train_data, M5)

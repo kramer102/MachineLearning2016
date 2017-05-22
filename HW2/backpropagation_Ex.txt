@@ -1,0 +1,1025 @@
+In [17]: np.dot(X,Wij)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-17-40752f39d3e2> in <module>()
+----> 1 np.dot(X,Wij)
+
+NameError: name 'Wij' is not defined
+
+In [18]: np.dot(X,Wji)
+Out[18]: array([ 0.3825,  0.39  ])
+
+In [19]: Hj = np.dot(X,Wji)
+
+In [20]: Hj
+Out[20]: array([ 0.3825,  0.39  ])
+
+In [21]: from scipy.special import expit
+
+In [22]: expit(.3775)
+Out[22]: 0.59326999210718723
+
+In [23]: expit(Hj)
+Out[23]: array([ 0.59447593,  0.5962827 ])
+
+In [24]: %clear
+
+In [25]: ls
+#.bash_history#          Documents/               Library/                 Pictures/                anaconda2/               vagrant tutorial
+#.zshrc_profile#         Downloads/               Movies/                  Public/                  hello.py                 vagrant_getting_started/
+Applications/            Dropbox/                 Music/                   Vagrantfile              hello.pyc                venple.err
+Desktop/                 Google Drive/            MyWinShared/             VirtualBox VMs/          prog/
+
+In [26]: var
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-26-5d73f6e1684c> in <module>()
+----> 1 var
+
+NameError: name 'var' is not defined
+
+In [27]: who
+Hj	 Wji	 X	 expit	 np
+
+In [28]: whos
+Variable   Type       Data/Info
+-------------------------------
+Hj         ndarray    2: 2 elems, type `float64`, 16 bytes
+Wji        ndarray    3x2: 6 elems, type `float64`, 48 bytes
+X          ndarray    3: 3 elems, type `float64`, 24 bytes
+expit      ufunc      <ufunc 'expit'>
+np         module     <module 'numpy' from '/Us<...>ages/numpy/__init__.pyc'>
+
+In [29]: whos H
+%%HTML  Hj
+
+In [29]: whos Hj
+No variables match your requested type.
+
+In [30]: who Hj
+No variables match your requested type.
+
+In [31]: whos
+Variable   Type       Data/Info
+-------------------------------
+Hj         ndarray    2: 2 elems, type `float64`, 16 bytes
+Wji        ndarray    3x2: 6 elems, type `float64`, 48 bytes
+X          ndarray    3: 3 elems, type `float64`, 24 bytes
+expit      ufunc      <ufunc 'expit'>
+np         module     <module 'numpy' from '/Us<...>ages/numpy/__init__.pyc'>
+
+In [32]: whos X
+No variables match your requested type.
+
+In [33]: X
+Out[33]: array([ 1.  ,  0.05,  0.1 ])
+
+In [34]: Wji
+Out[34]:
+array([[ 0.35,  0.35],
+       [ 0.15,  0.2 ],
+       [ 0.25,  0.3 ]])
+
+In [35]: Wji = np.array([[.35,.35],[.15,.25,.2,.3]])
+
+In [36]: Wji
+Out[36]: array([[0.35, 0.35], [0.15, 0.25, 0.2, 0.3]], dtype=object)
+
+In [37]: Wji = np.array([[.35,.35],[.15,.25],[.2,.3]])
+
+In [38]: Wji
+Out[38]:
+array([[ 0.35,  0.35],
+       [ 0.15,  0.25],
+       [ 0.2 ,  0.3 ]])
+
+In [39]: Hj = np.dot(X,Wji)
+
+In [40]: expit(Hj)
+Out[40]: array([ 0.59326999,  0.59688438])
+
+In [41]: H = explit(Hj)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-41-c880e4fbbf8b> in <module>()
+----> 1 H = explit(Hj)
+
+NameError: name 'explit' is not defined
+
+In [42]: H = expit(Hj)
+
+In [43]: H
+Out[43]: array([ 0.59326999,  0.59688438])
+
+In [44]: np.insert(H, 0, 1)
+Out[44]: array([ 1.        ,  0.59326999,  0.59688438])
+
+In [45]: H
+Out[45]: array([ 0.59326999,  0.59688438])
+
+In [46]: H = np.insert(H, 0, 1)
+
+In [47]: H
+Out[47]: array([ 1.        ,  0.59326999,  0.59688438])
+
+In [48]: Wkj = np.array([.6,.6],[.4,.45],[.5,.55])
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-48-de8d575f45ec> in <module>()
+----> 1 Wkj = np.array([.6,.6],[.4,.45],[.5,.55])
+
+ValueError: only 2 non-keyword arguments accepted
+
+In [49]: Wkj = np.array([.6,.6],[.4,.45],[.5,.55]])
+  File "<ipython-input-49-dbecebbd0089>", line 1
+    Wkj = np.array([.6,.6],[.4,.45],[.5,.55]])
+                                            ^
+SyntaxError: invalid syntax
+
+
+In [50]: Wkj = np.array([[.6,.6],[.4,.45],[.5,.55]])
+
+In [51]: Wkj
+Out[51]:
+array([[ 0.6 ,  0.6 ],
+       [ 0.4 ,  0.45],
+       [ 0.5 ,  0.55]])
+
+In [52]: Onet = np.dot(H,Wkj)
+
+In [53]: Onet
+Out[53]: array([ 1.13575019,  1.1952579 ])
+
+In [54]: O = expit(Onet)
+
+In [55]: O
+Out[55]: array([ 0.75689851,  0.76768012])
+
+In [56]: Wkj = np.array([[.6,.6],[.4,.5],[.45,.55]])
+
+In [57]: Onet = np.dot(H,Wkj)
+
+In [58]: O = expit(Onet)
+
+In [59]: O
+Out[59]: array([ 0.75136507,  0.77292847])
+
+In [60]: who
+H	 Hj	 O	 Onet	 Wji	 Wkj	 X	 expit	 np
+
+
+In [61]: whos
+Variable   Type       Data/Info
+-------------------------------
+H          ndarray    3: 3 elems, type `float64`, 24 bytes
+Hj         ndarray    2: 2 elems, type `float64`, 16 bytes
+O          ndarray    2: 2 elems, type `float64`, 16 bytes
+Onet       ndarray    2: 2 elems, type `float64`, 16 bytes
+Wji        ndarray    3x2: 6 elems, type `float64`, 48 bytes
+Wkj        ndarray    3x2: 6 elems, type `float64`, 48 bytes
+X          ndarray    3: 3 elems, type `float64`, 24 bytes
+expit      ufunc      <ufunc 'expit'>
+np         module     <module 'numpy' from '/Us<...>ages/numpy/__init__.pyc'>
+
+In [62]: math.erf(X)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-62-04c6c07c7c40> in <module>()
+----> 1 math.erf(X)
+
+NameError: name 'math' is not defined
+
+In [63]: erf(X)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-63-8acb2b657974> in <module>()
+----> 1 erf(X)
+
+NameError: name 'erf' is not defined
+
+In [64]: pi
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-64-68f7b1e53523> in <module>()
+----> 1 pi
+
+NameError: name 'pi' is not defined
+
+In [65]: import math as mt
+
+In [66]: mt.pi
+Out[66]: 3.141592653589793
+
+In [67]: mt.erf(X)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-67-2d5a69f691dd> in <module>()
+----> 1 mt.erf(X)
+
+TypeError: only length-1 arrays can be converted to Python scalars
+
+In [68]: mt.
+mt.acos       mt.atan       mt.copysign   mt.e          mt.expm1      mt.fmod       mt.hypot      mt.lgamma     mt.modf       mt.sin        mt.tanh
+mt.acosh      mt.atan2      mt.cos        mt.erf        mt.fabs       mt.frexp      mt.isinf      mt.log        mt.pi         mt.sinh       mt.trunc
+mt.asin       mt.atanh      mt.cosh       mt.erfc       mt.factorial  mt.fsum       mt.isnan      mt.log10      mt.pow        mt.sqrt
+mt.asinh      mt.ceil       mt.degrees    mt.exp        mt.floor      mt.gamma      mt.ldexp      mt.log1p      mt.radians    mt.tan
+
+In [68]: np.
+  File "<ipython-input-68-a58a88215da2>", line 1
+    np.
+       ^
+SyntaxError: invalid syntax
+
+
+In [69]: np.
+Display all 580 possibilities? (y or n)
+np.ALLOW_THREADS              np.byte                       np.fromiter                   np.max                        np.rot90
+np.BUFSIZE                    np.byte_bounds                np.frompyfunc                 np.maximum                    np.round
+np.CLIP                       np.bytes_                     np.fromregex                  np.maximum_sctype             np.round_
+np.ComplexWarning             np.c_                         np.fromstring                 np.may_share_memory           np.row_stack
+np.DataSource                 np.can_cast                   np.full                       np.mean                       np.s_
+np.ERR_CALL                   np.cast                       np.full_like                  np.median                     np.safe_eval
+np.ERR_DEFAULT                np.cbrt                       np.fv                         np.memmap                     np.save
+np.ERR_IGNORE                 np.cdouble                    np.generic                    np.meshgrid                   np.savetxt
+np.ERR_LOG                    np.ceil                       np.genfromtxt                 np.mgrid                      np.savez
+np.ERR_PRINT                  np.cfloat                     np.get_array_wrap             np.min                        np.savez_compressed
+np.ERR_RAISE                  np.char                       np.get_include                np.min_scalar_type            np.sctype2char
+np.ERR_WARN                   np.character                  np.get_printoptions           np.minimum                    np.sctypeDict
+np.FLOATING_POINT_SUPPORT     np.chararray                  np.getbuffer                  np.mintypecode                np.sctypeNA
+np.FPE_DIVIDEBYZERO           np.choose                     np.getbufsize                 np.mirr                       np.sctypes
+np.FPE_INVALID                np.clip                       np.geterr                     np.mod                        np.searchsorted
+np.FPE_OVERFLOW               np.clongdouble                np.geterrcall                 np.modf                       np.select
+np.FPE_UNDERFLOW              np.clongfloat                 np.geterrobj                  np.msort                      np.set_numeric_ops
+np.False_                     np.column_stack               np.gradient                   np.multiply                   np.set_printoptions
+np.Inf                        np.common_type                np.greater                    np.nan                        np.set_string_function
+np.Infinity                   np.compare_chararrays         np.greater_equal              np.nan_to_num                 np.setbufsize
+np.MAXDIMS                    np.compat                     np.half                       np.nanargmax                  np.setdiff1d
+np.MachAr                     np.complex                    np.hamming                    np.nanargmin                  np.seterr
+np.ModuleDeprecationWarning   np.complex128                 np.hanning                    np.nanmax                     np.seterrcall
+np.NAN                        np.complex256                 np.histogram                  np.nanmean                    np.seterrobj
+np.NINF                       np.complex64                  np.histogram2d                np.nanmedian                  np.setxor1d
+np.NZERO                      np.complex_                   np.histogramdd                np.nanmin                     np.shape
+np.NaN                        np.complexfloating            np.hsplit                     np.nanpercentile              np.short
+np.PINF                       np.compress                   np.hstack                     np.nanprod                    np.show_config
+np.PZERO                      np.concatenate                np.hypot                      np.nanstd                     np.sign
+np.PackageLoader              np.conj                       np.i0                         np.nansum                     np.signbit
+np.RAISE                      np.conjugate                  np.identity                   np.nanvar                     np.signedinteger
+np.RankWarning                np.convolve                   np.iinfo                      np.nbytes                     np.sin
+np.SHIFT_DIVIDEBYZERO         np.copy                       np.imag                       np.ndarray                    np.sinc
+np.SHIFT_INVALID              np.copysign                   np.in1d                       np.ndenumerate                np.single
+np.SHIFT_OVERFLOW             np.copyto                     np.index_exp                  np.ndfromtxt                  np.singlecomplex
+np.SHIFT_UNDERFLOW            np.core                       np.indices                    np.ndim                       np.sinh
+np.ScalarType                 np.corrcoef                   np.inexact                    np.ndindex                    np.size
+np.Tester                     np.correlate                  np.inf                        np.nditer                     np.sometrue
+np.True_                      np.cos                        np.info                       np.negative                   np.sort
+np.UFUNC_BUFSIZE_DEFAULT      np.cosh                       np.infty                      np.nested_iters               np.sort_complex
+np.UFUNC_PYVALS_NAME          np.count_nonzero              np.inner                      np.newaxis                    np.source
+np.VisibleDeprecationWarning  np.cov                        np.insert                     np.newbuffer                  np.spacing
+np.WRAP                       np.cross                      np.int                        np.nextafter                  np.split
+np.abs                        np.csingle                    np.int0                       np.nonzero                    np.sqrt
+np.absolute                   np.ctypeslib                  np.int16                      np.not_equal                  np.square
+np.absolute_import            np.cumprod                    np.int32                      np.nper                       np.squeeze
+np.add                        np.cumproduct                 np.int64                      np.npv                        np.stack
+np.add_docstring              np.cumsum                     np.int8                       np.numarray                   np.std
+np.add_newdoc                 np.datetime64                 np.int_                       np.number                     np.str
+np.add_newdoc_ufunc           np.datetime_as_string         np.int_asbuffer               np.obj2sctype                 np.str_
+np.add_newdocs                np.datetime_data              np.intc                       np.object                     np.string0
+np.alen                       np.deg2rad                    np.integer                    np.object0                    np.string_
+np.all                        np.degrees                    np.interp                     np.object_                    np.subtract
+np.allclose                   np.delete                     np.intersect1d                np.ogrid                      np.sum
+np.alltrue                    np.deprecate                  np.intp                       np.oldnumeric                 np.swapaxes
+np.alterdot                   np.deprecate_with_doc         np.invert                     np.ones                       np.sys
+np.amax                       np.diag                       np.ipmt                       np.ones_like                  np.take
+np.amin                       np.diag_indices               np.irr                        np.outer                      np.tan
+np.angle                      np.diag_indices_from          np.is_busday                  np.packbits                   np.tanh
+np.any                        np.diagflat                   np.isclose                    np.pad                        np.tensordot
+np.append                     np.diagonal                   np.iscomplex                  np.partition                  np.test
+np.apply_along_axis           np.diff                       np.iscomplexobj               np.percentile                 np.testing
+np.apply_over_axes            np.digitize                   np.isfinite                   np.pi                         np.tile
+np.arange                     np.disp                       np.isfortran                  np.piecewise                  np.timedelta64
+np.arccos                     np.divide                     np.isinf                      np.pkgload                    np.trace
+np.arccosh                    np.division                   np.isnan                      np.place                      np.transpose
+np.arcsin                     np.dot                        np.isneginf                   np.pmt                        np.trapz
+np.arcsinh                    np.double                     np.isposinf                   np.poly                       np.tri
+np.arctan                     np.dsplit                     np.isreal                     np.poly1d                     np.tril
+np.arctan2                    np.dstack                     np.isrealobj                  np.polyadd                    np.tril_indices
+np.arctanh                    np.dtype                      np.isscalar                   np.polyder                    np.tril_indices_from
+np.argmax                     np.dual                       np.issctype                   np.polydiv                    np.trim_zeros
+np.argmin                     np.e                          np.issubclass_                np.polyfit                    np.triu
+np.argpartition               np.ediff1d                    np.issubdtype                 np.polyint                    np.triu_indices
+np.argsort                    np.einsum                     np.issubsctype                np.polymul                    np.triu_indices_from
+np.argwhere                   np.emath                      np.iterable                   np.polynomial                 np.true_divide
+np.around                     np.empty                      np.ix_                        np.polysub                    np.trunc
+np.array                      np.empty_like                 np.kaiser                     np.polyval                    np.typeDict
+np.array2string               np.equal                      np.kron                       np.power                      np.typeNA
+np.array_equal                np.errstate                   np.ldexp                      np.ppmt                       np.typecodes
+np.array_equiv                np.euler_gamma                np.left_shift                 np.print_function             np.typename
+np.array_repr                 np.exp                        np.less                       np.prod                       np.ubyte
+np.array_split                np.exp2                       np.less_equal                 np.product                    np.ufunc
+np.array_str                  np.expand_dims                np.lexsort                    np.promote_types              np.uint
+np.asanyarray                 np.expm1                      np.lib                        np.ptp                        np.uint0
+np.asarray                    np.extract                    np.linalg                     np.put                        np.uint16
+np.asarray_chkfinite          np.eye                        np.linspace                   np.putmask                    np.uint32
+np.ascontiguousarray          np.fabs                       np.little_endian              np.pv                         np.uint64
+np.asfarray                   np.fastCopyAndTranspose       np.load                       np.r_                         np.uint8
+np.asfortranarray             np.fft                        np.loads                      np.rad2deg                    np.uintc
+np.asmatrix                   np.fill_diagonal              np.loadtxt                    np.radians                    np.uintp
+np.asscalar                   np.find_common_type           np.log                        np.random                     np.ulonglong
+np.atleast_1d                 np.finfo                      np.log10                      np.rank                       np.unicode
+np.atleast_2d                 np.fix                        np.log1p                      np.rate                       np.unicode0
+np.atleast_3d                 np.flatiter                   np.log2                       np.ravel                      np.unicode_
+np.average                    np.flatnonzero                np.logaddexp                  np.ravel_multi_index          np.union1d
+np.bartlett                   np.flexible                   np.logaddexp2                 np.real                       np.unique
+np.base_repr                  np.fliplr                     np.logical_and                np.real_if_close              np.unpackbits
+np.bench                      np.flipud                     np.logical_not                np.rec                        np.unravel_index
+np.binary_repr                np.float                      np.logical_or                 np.recarray                   np.unsignedinteger
+np.bincount                   np.float128                   np.logical_xor                np.recfromcsv                 np.unwrap
+np.bitwise_and                np.float16                    np.logspace                   np.recfromtxt                 np.ushort
+np.bitwise_not                np.float32                    np.long                       np.reciprocal                 np.vander
+np.bitwise_or                 np.float64                    np.longcomplex                np.record                     np.var
+np.bitwise_xor                np.float_                     np.longdouble                 np.remainder                  np.vdot
+np.blackman                   np.floating                   np.longfloat                  np.repeat                     np.vectorize
+np.bmat                       np.floor                      np.longlong                   np.require                    np.version
+np.bool                       np.floor_divide               np.lookfor                    np.reshape                    np.void
+np.bool8                      np.fmax                       np.ma                         np.resize                     np.void0
+np.bool_                      np.fmin                       np.mafromtxt                  np.restoredot                 np.vsplit
+np.broadcast                  np.fmod                       np.mask_indices               np.result_type                np.vstack
+np.broadcast_arrays           np.format_parser              np.mat                        np.right_shift                np.warnings
+np.broadcast_to               np.frexp                      np.math                       np.rint                       np.where
+np.busday_count               np.frombuffer                 np.matmul                     np.roll                       np.who
+np.busday_offset              np.fromfile                   np.matrix                     np.rollaxis                   np.zeros
+np.busdaycalendar             np.fromfunction               np.matrixlib                  np.roots                      np.zeros_like
+
+In [69]: who
+H	 Hj	 O	 Onet	 Wji	 Wkj	 X	 expit	 mt
+np
+
+In [70]: whos
+Variable   Type       Data/Info
+-------------------------------
+H          ndarray    3: 3 elems, type `float64`, 24 bytes
+Hj         ndarray    2: 2 elems, type `float64`, 16 bytes
+O          ndarray    2: 2 elems, type `float64`, 16 bytes
+Onet       ndarray    2: 2 elems, type `float64`, 16 bytes
+Wji        ndarray    3x2: 6 elems, type `float64`, 48 bytes
+Wkj        ndarray    3x2: 6 elems, type `float64`, 48 bytes
+X          ndarray    3: 3 elems, type `float64`, 24 bytes
+expit      ufunc      <ufunc 'expit'>
+mt         module     <module 'math' from '/Use<...>2.7/lib-dynload/math.so'>
+np         module     <module 'numpy' from '/Us<...>ages/numpy/__init__.pyc'>
+
+In [71]: O
+Out[71]: array([ 0.75136507,  0.77292847])
+
+In [72]: O - np.array([.1,.1])
+Out[72]: array([ 0.65136507,  0.67292847])
+
+In [73]: np.sum(O)
+Out[73]: 1.5242935348737783
+
+In [74]: np.
+Display all 580 possibilities? (y or n)
+np.ALLOW_THREADS              np.byte                       np.fromiter                   np.max                        np.rot90
+np.BUFSIZE                    np.byte_bounds                np.frompyfunc                 np.maximum                    np.round
+np.CLIP                       np.bytes_                     np.fromregex                  np.maximum_sctype             np.round_
+np.ComplexWarning             np.c_                         np.fromstring                 np.may_share_memory           np.row_stack
+np.DataSource                 np.can_cast                   np.full                       np.mean                       np.s_
+np.ERR_CALL                   np.cast                       np.full_like                  np.median                     np.safe_eval
+np.ERR_DEFAULT                np.cbrt                       np.fv                         np.memmap                     np.save
+np.ERR_IGNORE                 np.cdouble                    np.generic                    np.meshgrid                   np.savetxt
+np.ERR_LOG                    np.ceil                       np.genfromtxt                 np.mgrid                      np.savez
+np.ERR_PRINT                  np.cfloat                     np.get_array_wrap             np.min                        np.savez_compressed
+np.ERR_RAISE                  np.char                       np.get_include                np.min_scalar_type            np.sctype2char
+np.ERR_WARN                   np.character                  np.get_printoptions           np.minimum                    np.sctypeDict
+np.FLOATING_POINT_SUPPORT     np.chararray                  np.getbuffer                  np.mintypecode                np.sctypeNA
+np.FPE_DIVIDEBYZERO           np.choose                     np.getbufsize                 np.mirr                       np.sctypes
+np.FPE_INVALID                np.clip                       np.geterr                     np.mod                        np.searchsorted
+np.FPE_OVERFLOW               np.clongdouble                np.geterrcall                 np.modf                       np.select
+np.FPE_UNDERFLOW              np.clongfloat                 np.geterrobj                  np.msort                      np.set_numeric_ops
+np.False_                     np.column_stack               np.gradient                   np.multiply                   np.set_printoptions
+np.Inf                        np.common_type                np.greater                    np.nan                        np.set_string_function
+np.Infinity                   np.compare_chararrays         np.greater_equal              np.nan_to_num                 np.setbufsize
+np.MAXDIMS                    np.compat                     np.half                       np.nanargmax                  np.setdiff1d
+np.MachAr                     np.complex                    np.hamming                    np.nanargmin                  np.seterr
+np.ModuleDeprecationWarning   np.complex128                 np.hanning                    np.nanmax                     np.seterrcall
+np.NAN                        np.complex256                 np.histogram                  np.nanmean                    np.seterrobj
+np.NINF                       np.complex64                  np.histogram2d                np.nanmedian                  np.setxor1d
+np.NZERO                      np.complex_                   np.histogramdd                np.nanmin                     np.shape
+np.NaN                        np.complexfloating            np.hsplit                     np.nanpercentile              np.short
+np.PINF                       np.compress                   np.hstack                     np.nanprod                    np.show_config
+np.PZERO                      np.concatenate                np.hypot                      np.nanstd                     np.sign
+np.PackageLoader              np.conj                       np.i0                         np.nansum                     np.signbit
+np.RAISE                      np.conjugate                  np.identity                   np.nanvar                     np.signedinteger
+np.RankWarning                np.convolve                   np.iinfo                      np.nbytes                     np.sin
+np.SHIFT_DIVIDEBYZERO         np.copy                       np.imag                       np.ndarray                    np.sinc
+np.SHIFT_INVALID              np.copysign                   np.in1d                       np.ndenumerate                np.single
+np.SHIFT_OVERFLOW             np.copyto                     np.index_exp                  np.ndfromtxt                  np.singlecomplex
+np.SHIFT_UNDERFLOW            np.core                       np.indices                    np.ndim                       np.sinh
+np.ScalarType                 np.corrcoef                   np.inexact                    np.ndindex                    np.size
+np.Tester                     np.correlate                  np.inf                        np.nditer                     np.sometrue
+np.True_                      np.cos                        np.info                       np.negative                   np.sort
+np.UFUNC_BUFSIZE_DEFAULT      np.cosh                       np.infty                      np.nested_iters               np.sort_complex
+np.UFUNC_PYVALS_NAME          np.count_nonzero              np.inner                      np.newaxis                    np.source
+np.VisibleDeprecationWarning  np.cov                        np.insert                     np.newbuffer                  np.spacing
+np.WRAP                       np.cross                      np.int                        np.nextafter                  np.split
+np.abs                        np.csingle                    np.int0                       np.nonzero                    np.sqrt
+np.absolute                   np.ctypeslib                  np.int16                      np.not_equal                  np.square
+np.absolute_import            np.cumprod                    np.int32                      np.nper                       np.squeeze
+np.add                        np.cumproduct                 np.int64                      np.npv                        np.stack
+np.add_docstring              np.cumsum                     np.int8                       np.numarray                   np.std
+np.add_newdoc                 np.datetime64                 np.int_                       np.number                     np.str
+np.add_newdoc_ufunc           np.datetime_as_string         np.int_asbuffer               np.obj2sctype                 np.str_
+np.add_newdocs                np.datetime_data              np.intc                       np.object                     np.string0
+np.alen                       np.deg2rad                    np.integer                    np.object0                    np.string_
+np.all                        np.degrees                    np.interp                     np.object_                    np.subtract
+np.allclose                   np.delete                     np.intersect1d                np.ogrid                      np.sum
+np.alltrue                    np.deprecate                  np.intp                       np.oldnumeric                 np.swapaxes
+np.alterdot                   np.deprecate_with_doc         np.invert                     np.ones                       np.sys
+np.amax                       np.diag                       np.ipmt                       np.ones_like                  np.take
+np.amin                       np.diag_indices               np.irr                        np.outer                      np.tan
+np.angle                      np.diag_indices_from          np.is_busday                  np.packbits                   np.tanh
+np.any                        np.diagflat                   np.isclose                    np.pad                        np.tensordot
+np.append                     np.diagonal                   np.iscomplex                  np.partition                  np.test
+np.apply_along_axis           np.diff                       np.iscomplexobj               np.percentile                 np.testing
+np.apply_over_axes            np.digitize                   np.isfinite                   np.pi                         np.tile
+np.arange                     np.disp                       np.isfortran                  np.piecewise                  np.timedelta64
+np.arccos                     np.divide                     np.isinf                      np.pkgload                    np.trace
+np.arccosh                    np.division                   np.isnan                      np.place                      np.transpose
+np.arcsin                     np.dot                        np.isneginf                   np.pmt                        np.trapz
+np.arcsinh                    np.double                     np.isposinf                   np.poly                       np.tri
+np.arctan                     np.dsplit                     np.isreal                     np.poly1d                     np.tril
+np.arctan2                    np.dstack                     np.isrealobj                  np.polyadd                    np.tril_indices
+np.arctanh                    np.dtype                      np.isscalar                   np.polyder                    np.tril_indices_from
+np.argmax                     np.dual                       np.issctype                   np.polydiv                    np.trim_zeros
+np.argmin                     np.e                          np.issubclass_                np.polyfit                    np.triu
+np.argpartition               np.ediff1d                    np.issubdtype                 np.polyint                    np.triu_indices
+np.argsort                    np.einsum                     np.issubsctype                np.polymul                    np.triu_indices_from
+np.argwhere                   np.emath                      np.iterable                   np.polynomial                 np.true_divide
+np.around                     np.empty                      np.ix_                        np.polysub                    np.trunc
+np.array                      np.empty_like                 np.kaiser                     np.polyval                    np.typeDict
+np.array2string               np.equal                      np.kron                       np.power                      np.typeNA
+np.array_equal                np.errstate                   np.ldexp                      np.ppmt                       np.typecodes
+np.array_equiv                np.euler_gamma                np.left_shift                 np.print_function             np.typename
+np.array_repr                 np.exp                        np.less                       np.prod                       np.ubyte
+np.array_split                np.exp2                       np.less_equal                 np.product                    np.ufunc
+np.array_str                  np.expand_dims                np.lexsort                    np.promote_types              np.uint
+np.asanyarray                 np.expm1                      np.lib                        np.ptp                        np.uint0
+np.asarray                    np.extract                    np.linalg                     np.put                        np.uint16
+np.asarray_chkfinite          np.eye                        np.linspace                   np.putmask                    np.uint32
+np.ascontiguousarray          np.fabs                       np.little_endian              np.pv                         np.uint64
+np.asfarray                   np.fastCopyAndTranspose       np.load                       np.r_                         np.uint8
+np.asfortranarray             np.fft                        np.loads                      np.rad2deg                    np.uintc
+np.asmatrix                   np.fill_diagonal              np.loadtxt                    np.radians                    np.uintp
+np.asscalar                   np.find_common_type           np.log                        np.random                     np.ulonglong
+np.atleast_1d                 np.finfo                      np.log10                      np.rank                       np.unicode
+np.atleast_2d                 np.fix                        np.log1p                      np.rate                       np.unicode0
+np.atleast_3d                 np.flatiter                   np.log2                       np.ravel                      np.unicode_
+np.average                    np.flatnonzero                np.logaddexp                  np.ravel_multi_index          np.union1d
+np.bartlett                   np.flexible                   np.logaddexp2                 np.real                       np.unique
+np.base_repr                  np.fliplr                     np.logical_and                np.real_if_close              np.unpackbits
+np.bench                      np.flipud                     np.logical_not                np.rec                        np.unravel_index
+np.binary_repr                np.float                      np.logical_or                 np.recarray                   np.unsignedinteger
+np.bincount                   np.float128                   np.logical_xor                np.recfromcsv                 np.unwrap
+np.bitwise_and                np.float16                    np.logspace                   np.recfromtxt                 np.ushort
+np.bitwise_not                np.float32                    np.long                       np.reciprocal                 np.vander
+np.bitwise_or                 np.float64                    np.longcomplex                np.record                     np.var
+np.bitwise_xor                np.float_                     np.longdouble                 np.remainder                  np.vdot
+np.blackman                   np.floating                   np.longfloat                  np.repeat                     np.vectorize
+np.bmat                       np.floor                      np.longlong                   np.require                    np.version
+np.bool                       np.floor_divide               np.lookfor                    np.reshape                    np.void
+np.bool8                      np.fmax                       np.ma                         np.resize                     np.void0
+np.bool_                      np.fmin                       np.mafromtxt                  np.restoredot                 np.vsplit
+np.broadcast                  np.fmod                       np.mask_indices               np.result_type                np.vstack
+np.broadcast_arrays           np.format_parser              np.mat                        np.right_shift                np.warnings
+np.broadcast_to               np.frexp                      np.math                       np.rint                       np.where
+np.busday_count               np.frombuffer                 np.matmul                     np.roll                       np.who
+np.busday_offset              np.fromfile                   np.matrix                     np.rollaxis                   np.zeros
+np.busdaycalendar             np.fromfunction               np.matrixlib                  np.roots                      np.zeros_like
+
+In [74]: np.square([2,2])
+Out[74]: array([4, 4])
+
+In [75]: O
+Out[75]: array([ 0.75136507,  0.77292847])
+
+In [76]: T
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-76-8f898b22d33b> in <module>()
+----> 1 T
+
+NameError: name 'T' is not defined
+
+In [77]: T = np.array([.01, .99])
+
+In [78]: .5*np.sum(np.square(T-O))
+Out[78]: 0.29837110876000272
+
+In [79]: dk1 = O[0]*(1-O[0])*(T[0]-O[0])
+
+In [80]: dk2 = O[1]*(1-O[1])*(T[1]-O[1])
+
+In [81]: dk1
+Out[81]: -0.13849856162855698
+
+In [82]: dk2
+Out[82]: 0.038098236516556229
+
+In [83]: error = .5*np.sum(np.square(T-O))
+
+In [84]: error
+Out[84]: 0.29837110876000272
+
+In [85]: np.array([1,1])*np.array([2,2])
+Out[85]: array([2, 2])
+
+In [86]: dk = O*(1-O)*(T-O)
+
+In [87]: dk
+Out[87]: array([-0.13849856,  0.03809824])
+
+In [88]: Wji
+Out[88]:
+array([[ 0.35,  0.35],
+       [ 0.15,  0.25],
+       [ 0.2 ,  0.3 ]])
+
+In [89]: reset
+Once deleted, variables cannot be recovered. Proceed (y/[n])? y
+
+In [90]: X = np.array([.05, .10])
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-90-55602612aefc> in <module>()
+----> 1 X = np.array([.05, .10])
+
+NameError: name 'np' is not defined
+
+In [91]: import numpy as np
+
+In [92]: X = np.array([.05, .10])
+
+In [93]: X.re
+X.real     X.repeat   X.reshape  X.resize
+
+In [93]: X.reshape?
+Docstring:
+a.reshape(shape, order='C')
+
+Returns an array containing the same data with a new shape.
+
+Refer to `numpy.reshape` for full documentation.
+
+See Also
+--------
+numpy.reshape : equivalent function
+Type:      builtin_function_or_method
+
+In [94]: X.reshape(1)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-94-f17500ad53c2> in <module>()
+----> 1 X.reshape(1)
+
+ValueError: total size of new array must be unchanged
+
+In [95]: X.reshape(,1)
+  File "<ipython-input-95-faba729bd6d4>", line 1
+    X.reshape(,1)
+              ^
+SyntaxError: invalid syntax
+
+
+In [96]: X.reshape(:,1)
+  File "<ipython-input-96-586489fbfefa>", line 1
+    X.reshape(:,1)
+              ^
+SyntaxError: invalid syntax
+
+
+In [97]: X.reshape(X.ndim,1)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-97-9851c85c40c9> in <module>()
+----> 1 X.reshape(X.ndim,1)
+
+ValueError: total size of new array must be unchanged
+
+In [98]: X.ndim
+Out[98]: 1
+
+In [99]: X.reshape(len(X),1)
+Out[99]:
+array([[ 0.05],
+       [ 0.1 ]])
+
+In [100]: history
+import numpy as np
+np.dot([.05,.1],[.15, .2; .25, .3])
+np.dot([.05,.1],[.15, .2; .25, .3])
+np.dot([.05,.1],[.15, .2: .25, .3])
+np.dot([.05,.1],[[.15, .2] [.25, .3]])
+X = np.array([.05, .1])
+X
+Wji = np.array([[.15, .2],[.25,.3]])
+Wji
+np.dot(X,Wij)
+np.dot(X,Wji)
+.05*.15
+.05*.15+.1*.25
+Wji = np.array([[.35,.35],[.15, .2],[.25,.3]])
+X = np.array([1, .05, .1])
+np.dot(X,Wij)
+np.dot(X,Wij)
+np.dot(X,Wji)
+Hj = np.dot(X,Wji)
+Hj
+from scipy.special import expit
+expit(.3775)
+expit(Hj)
+%clear
+ls
+var
+who
+whos
+whos Hj
+who Hj
+whos
+whos X
+X
+Wji
+Wji = np.array([[.35,.35],[.15,.25,.2,.3]])
+Wji
+Wji = np.array([[.35,.35],[.15,.25],[.2,.3]])
+Wji
+Hj = np.dot(X,Wji)
+expit(Hj)
+H = explit(Hj)
+H = expit(Hj)
+H
+np.insert(H, 0, 1)
+H
+H = np.insert(H, 0, 1)
+H
+Wkj = np.array([.6,.6],[.4,.45],[.5,.55])
+Wkj = np.array([.6,.6],[.4,.45],[.5,.55]])
+Wkj = np.array([[.6,.6],[.4,.45],[.5,.55]])
+Wkj
+Onet = np.dot(H,Wkj)
+Onet
+O = expit(Onet)
+O
+Wkj = np.array([[.6,.6],[.4,.5],[.45,.55]])
+Onet = np.dot(H,Wkj)
+O = expit(Onet)
+O
+who
+whos
+math.erf(X)
+erf(X)
+pi
+import math as mt
+mt.pi
+mt.erf(X)
+np.
+who
+whos
+O
+O - np.array([.1,.1])
+np.sum(O)
+np.square([2,2])
+O
+T
+T = np.array([.01, .99])
+.5*np.sum(np.square(T-O))
+dk1 = O[0]*(1-O[0])*(T[0]-O[0])
+dk2 = O[1]*(1-O[1])*(T[1]-O[1])
+dk1
+dk2
+error = .5*np.sum(np.square(T-O))
+error
+np.array([1,1])*np.array([2,2])
+dk = O*(1-O)*(T-O)
+dk
+Wji
+reset
+X = np.array([.05, .10])
+import numpy as np
+X = np.array([.05, .10])
+X.reshape?
+X.reshape(1)
+X.reshape(,1)
+X.reshape(:,1)
+X.reshape(X.ndim,1)
+X.ndim
+X.reshape(len(X),1)
+history
+
+In [101]: who
+X	 np
+
+In [102]: X
+Out[102]: array([ 0.05,  0.1 ])
+
+In [103]: X = X.reshape(2,1)
+
+In [104]: X
+Out[104]:
+array([[ 0.05],
+       [ 0.1 ]])
+
+In [105]: Wji = np.array([[.15,.20],[.25,.30]])
+
+In [106]: W
+Warning  Wji
+
+In [106]: Wji
+Out[106]:
+array([[ 0.15,  0.2 ],
+       [ 0.25,  0.3 ]])
+
+In [107]: np.dot(Wji,X)
+Out[107]:
+array([[ 0.0275],
+       [ 0.0425]])
+
+In [108]: H = np.dot(Wji,X)+.35
+
+In [109]: H
+Out[109]:
+array([[ 0.3775],
+       [ 0.3925]])
+
+In [110]: b1 = .35
+
+In [111]: b2 = .60
+
+In [112]: T = np.array([.01],[.99])
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-112-c81cf79856dc> in <module>()
+----> 1 T = np.array([.01],[.99])
+
+TypeError: data type not understood
+
+In [113]: T = np.array([[.01],[.99]])
+
+In [114]: T
+Out[114]:
+array([[ 0.01],
+       [ 0.99]])
+
+In [115]: from scipy.special import expit
+
+In [116]: who
+H	 T	 Wji	 X	 b1	 b2	 expit	 np
+
+In [117]: H = expit(H)
+
+In [118]: H
+Out[118]:
+array([[ 0.59326999],
+       [ 0.59688438]])
+
+In [119]: Wkj = np.array([[.4,.45],[.5,.55]])
+
+In [120]: Wkj
+Out[120]:
+array([[ 0.4 ,  0.45],
+       [ 0.5 ,  0.55]])
+
+In [121]: O = np.dot(Wkj,H)+b2
+
+In [122]: O
+Out[122]:
+array([[ 1.10590597],
+       [ 1.2249214 ]])
+
+In [123]: O = ex
+except    exec      execfile  exit      expit
+
+In [123]: O = expit(O)
+
+In [124]: O
+Out[124]:
+array([[ 0.75136507],
+       [ 0.77292847]])
+
+In [125]: E = .5*np.sum(np.square(T-O))
+
+In [126]: E
+Out[126]: 0.29837110876000272
+
+In [127]: del_k = O*(1-O)*(T-O)
+
+In [128]: de
+%%debug  %debug   def      del      del_k    delattr
+
+In [128]: del
+del      del_k    delattr
+
+In [128]: del_k
+Out[128]:
+array([[-0.13849856],
+       [ 0.03809824]])
+
+In [129]: del_j = H*(1-H)*np.dot(Wkj,del_k)
+
+In [130]: del_j
+Out[130]:
+array([[-0.00923101],
+       [-0.01162049]])
+
+In [131]: del_j = H*(1-H)*np.dot(del_k.T,Wkj)
+
+In [132]: del_j
+Out[132]:
+array([[-0.00877135, -0.00998269],
+       [-0.00874637, -0.00995425]])
+
+In [133]: del_k.T
+Out[133]: array([[-0.13849856,  0.03809824]])
+
+In [134]: del_j = H*(1-H)*np.dot(del_k.T,Wkj).T
+
+In [135]: del_j
+Out[135]:
+array([[-0.00877135],
+       [-0.00995425]])
+
+In [136]: eta = .5
+
+In [137]: delta_Wkj = eta*del_k*H
+
+In [138]: delta_Wkj
+Out[138]:
+array([[-0.04108352],
+       [ 0.01137012]])
+
+In [139]: delta_Wkj = eta*np.dot(del_k,H)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-139-1a3e0a7768c2> in <module>()
+----> 1 delta_Wkj = eta*np.dot(del_k,H)
+
+ValueError: shapes (2,1) and (2,1) not aligned: 1 (dim 1) != 2 (dim 0)
+
+In [140]: delta_Wkj = eta*np.dot(H,del_k)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-140-4f08c8933a37> in <module>()
+----> 1 delta_Wkj = eta*np.dot(H,del_k)
+
+ValueError: shapes (2,1) and (2,1) not aligned: 1 (dim 1) != 2 (dim 0)
+
+In [141]: delta_Wkj = eta*np.dot(H.T,del_k)
+
+In [142]: Wkj = Wkj+delta_Wkj
+
+In [143]: Wkj
+Out[143]:
+array([[ 0.3702866,  0.4202866],
+       [ 0.4702866,  0.5202866]])
+
+In [144]: delta_Wkj = eta*np.dot(del_k.T,H)
+
+In [145]: Wkj = np.array([[.4,.45],[.5,.55]])
+
+In [146]: Wkj = Wkj+delta_Wkj
+
+In [147]: Wkj
+Out[147]:
+array([[ 0.3702866,  0.4202866],
+       [ 0.4702866,  0.5202866]])
+
+In [148]: del_k
+Out[148]:
+array([[-0.13849856],
+       [ 0.03809824]])
+
+In [149]: O
+Out[149]:
+array([[ 0.75136507],
+       [ 0.77292847]])
+
+In [150]: del_0 = O[0]*(1-O[0])*(T[0]-O[0])
+
+In [151]: del_0
+Out[151]: array([-0.13849856])
+
+In [152]: T[0]
+Out[152]: array([ 0.01])
+
+In [153]: O[0]
+Out[153]: array([ 0.75136507])
+
+In [154]: del_0 = O[0]*(1-O[0])*(O[0]-T[0])
+
+In [155]: del_0
+Out[155]: array([ 0.13849856])
+
+In [156]: T[0]-O[0]
+Out[156]: array([-0.74136507])
+
+In [157]: O[0]*(1-O[0])
+Out[157]: array([ 0.1868156])
+
+In [158]: H(0)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-158-aea38a678a3c> in <module>()
+----> 1 H(0)
+
+TypeError: 'numpy.ndarray' object is not callable
+
+In [159]: H[0]
+Out[159]: array([ 0.59326999])
+
+In [160]: del_0*H[0]
+Out[160]: array([ 0.08216704])
+
+In [161]: Wkj
+Out[161]:
+array([[ 0.3702866,  0.4202866],
+       [ 0.4702866,  0.5202866]])
+
+In [162]: Wkj = np.array([[.4,.45],[.5,.55]])
+
+In [163]: Wkj
+Out[163]:
+array([[ 0.4 ,  0.45],
+       [ 0.5 ,  0.55]])
+
+In [164]: del_k
+Out[164]:
+array([[-0.13849856],
+       [ 0.03809824]])
+
+In [165]: wkj
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-165-d2407043cb42> in <module>()
+----> 1 wkj
+
+NameError: name 'wkj' is not defined
+
+In [166]: Wkj
+Out[166]:
+array([[ 0.4 ,  0.45],
+       [ 0.5 ,  0.55]])
+
+In [167]: H
+Out[167]:
+array([[ 0.59326999],
+       [ 0.59688438]])
+
+In [168]: np.dot(H.T,del_k)
+Out[168]: array([[-0.0594268]])
+
+In [169]: np.dot(H,del_k.T)
+Out[169]:
+array([[-0.08216704,  0.02260254],
+       [-0.08266763,  0.02274024]])
+
+In [170]: delta_Wkj+eta*np.dot(H,del_k.T)
+Out[170]:
+array([[-0.07079692, -0.01841213],
+       [-0.07104721, -0.01834328]])
+
+In [171]: delta_Wkj=Wkj+eta*np.dot(H,del_k.T)
+
+In [172]: delta_Wkj
+Out[172]:
+array([[ 0.35891648,  0.46130127],
+       [ 0.45866619,  0.56137012]])
+
+In [173]: delta_Wkj=Wkj+eta*np.dot(del_k,H.T)
+
+In [174]: delta_Wkj
+Out[174]:
+array([[ 0.35891648,  0.40866619],
+       [ 0.51130127,  0.56137012]])
+
+In [175]: del_j
+Out[175]:
+array([[-0.00877135],
+       [-0.00995425]])
+
+In [176]: np.dot(del_j,X.T)
+Out[176]:
+array([[-0.00043857, -0.00087714],
+       [-0.00049771, -0.00099543]])
+
+In [177]: Wji_new = np.dot(del_j,X.T)+Wji
+
+In [178]: Wji_new
+Out[178]:
+array([[ 0.14956143,  0.19912286],
+       [ 0.24950229,  0.29900457]])
+
+In [179]: Wji
+Out[179]:
+array([[ 0.15,  0.2 ],
+       [ 0.25,  0.3 ]])
+
+In [180]:
